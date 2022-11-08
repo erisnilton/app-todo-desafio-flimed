@@ -1,0 +1,29 @@
+.view--card {
+  background: #ebedf2;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  &--title {
+    border-top-left-radius: 0.25em;
+    border-top-right-radius: 0.25em;
+    display: block;
+    width: 100%;
+    height: 50px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    background-color: #45718c;
+    margin-bottom: 15px;
+    padding: 10px;
+    color: white;
+  }
+
+  &--content {
+    margin-bottom: 15px;
+    padding: 0px 15px;
+  }
+
+  &--footer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+}
