@@ -1,21 +1,19 @@
 .navbar {
   position: sticky;
-  top:0;
+  top: 0;
   display: flex;
   align-items: center;
   background: white;
 
-  &--title {
+  &--title, &--name {
     display: none;
   }
-
-  &--name {
-    margin-right: 1rem;
-    font-size: 1rem;
+  &--logo {
+    margin-right: 2rem;
   }
 
   & button {
-    margin-right: 2rem;
+    margin-left: 1rem;
   }
 
   @media screen and (min-width: 1024px) {
@@ -33,6 +31,14 @@
       flex: 1;
       color: #000;
       font-size: 2em;
+    }
+    &--name {
+      margin-right: 1rem;
+      font-size: 1rem;
+    }
+
+    & button {
+      margin-right: 2rem;
     }
   }
 }
