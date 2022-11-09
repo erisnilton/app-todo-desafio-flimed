@@ -4,23 +4,23 @@ import Button from "../button/Button";
 import "./style.scss";
 import { createNota } from "../../services/api";
 import { useNavigate } from "react-router";
-import { Nota } from "../../model/nota";
+import { Note } from "../../model/note";
 import { Authenticated } from "../Authenticated/Authenticated";
 
-const CadastrarNotaForm: React.FunctionComponent = () => {
+const RegistrationNoteForm: React.FunctionComponent = () => {
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Nota>();
+  } = useForm<Note>();
 
   function handleCancel() {
     navigate("/");
   }
 
-  const onSubmit: SubmitHandler<Nota> = (nota) => {
+  const onSubmit: SubmitHandler<Note> = (nota) => {
     let items = JSON.parse(localStorage.getItem("notas") || "[]");
     createNota(nota)
       .then((response) => {
@@ -64,4 +64,4 @@ const CadastrarNotaForm: React.FunctionComponent = () => {
   );
 };
 
-export default Authenticated(CadastrarNotaForm);
+export default Authenticated(RegistrationNoteForm);

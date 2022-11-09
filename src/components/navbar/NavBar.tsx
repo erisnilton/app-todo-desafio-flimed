@@ -3,7 +3,7 @@ import Button from "../button/Button";
 import Logo from "../../assets/imgs/Logo.svg";
 import "./style.scss";
 
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../context/auth";
 
@@ -25,10 +25,9 @@ const NavBar: React.FunctionComponent = () => {
       {user && <span className="navbar--name">Logado como: <strong>{user.name}</strong></span>}
       
       { user && <Button size="sm" color="danger"  onClick={logout}>Logout</Button> }
-      <Link to={"/cadastro"}>
+      <Link to={"/notes/create"}>
         <Button size="sm">Nova Nota</Button>
       </Link>
-
     </div>
   );
 };

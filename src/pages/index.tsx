@@ -1,10 +1,8 @@
 import NavBar from "../components/navbar/NavBar";
 import Layout from "../components/layout/Layout";
-import NotaView from "../components/nota-view/NotaView";
 import { Authenticated } from "../components/Authenticated/Authenticated";
 import { useState, useEffect, useContext } from "react";
-import { getNotas, getAllNotas } from "../services/api";
-import { AuthContext } from "../context/auth";
+import NoteView from "../components/note-view/NoteView";
 
 const Home: React.FunctionComponent = () => {
   const [notas, setNotas] = useState([]);
@@ -14,7 +12,7 @@ const Home: React.FunctionComponent = () => {
     if (notas) {
       setNotas(JSON.parse(notas) || []);
     }
-  }, [notas]);
+  }, []);
 
   return (
     <>
@@ -22,7 +20,7 @@ const Home: React.FunctionComponent = () => {
       <Layout>
         <div className="view--nota">
           {notas.map((nota, index) => (
-            <NotaView key={index} nota={nota}></NotaView>
+            <NoteView key={index} nota={nota}></NoteView>
           ))}
         </div>
       </Layout>

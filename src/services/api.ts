@@ -1,5 +1,5 @@
+import { Note } from './../model/note';
 import axios from "axios";
-import { Nota } from "../model/nota";
 import { User } from "../model/user";
 export const api = axios.create({
   baseURL: "https://test-flimed-backend.herokuapp.com",
@@ -17,7 +17,7 @@ export const getNotas = async (token: string, user: User) => {
   });
 };
 
-export const createNota = async (nota: Nota) => {
+export const createNota = async (nota: Note) => {
   const token = localStorage.getItem("token");
 
   const headers = {
@@ -32,7 +32,7 @@ export const getAllNotas = () => {
   return JSON.parse(localStorage.getItem("notas") || "[]");
 };
 
-export const getNota = (id: string | undefined) => {
+export const getNota =  (id: string | undefined) => {
   const token = localStorage.getItem("token");
 
   const headers = {
@@ -42,9 +42,7 @@ export const getNota = (id: string | undefined) => {
   return api.get(`/notes/show/${id}`, { headers });
 }
 
-export const updateNota = (nota: Nota, id: string | undefined) => {
-  console.log(nota);
-  
+export const updateNota = (nota: Note, id: string | undefined) => {  
   const token = localStorage.getItem("token");
 
   const headers = {

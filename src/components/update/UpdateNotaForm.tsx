@@ -1,21 +1,23 @@
 import "./style.scss";
 import React, { useState, useEffect } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import Button from "../button/Button";
 import { getNota, updateNota } from "../../services/api";
 import { useNavigate, useParams } from "react-router";
-import { Nota } from "../../model/nota";
+import { Note } from "../../model/note";
 import { Authenticated } from "../Authenticated/Authenticated";
+import Input from "../input/input";
 
 const UpdateNotaForm: React.FunctionComponent = () => {
-  const [nota, setNota] = useState<Nota>();
+  const [nota, setNota] = useState<Note>();
+  const [title, setTitle] = useState<string>("");
   const navigate = useNavigate();
 
   const { id } = useParams<string>();
 
-  function updateNoteLocalStorage(updatedData: Nota) {
+  function updateNoteLocalStorage(updatedData: Note) {
     let items = JSON.parse(localStorage.getItem("notas") || "[]");
-    items = items.map((item: Nota) => {
+    items = items.map((item: Note) => {
       if (item.id === updatedData.id) {
         return updatedData;
       }
@@ -45,9 +47,9 @@ const UpdateNotaForm: React.FunctionComponent = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Nota>();
+  } = useForm<Note>();
 
-  const onSubmit: SubmitHandler<Nota> = (nota) => {
+  const onSubmit: SubmitHandler<Note> = (nota) => {
     let items = JSON.parse(localStorage.getItem("notas") || "[]");
     updateNota(nota, id)
       .then((response) => {
