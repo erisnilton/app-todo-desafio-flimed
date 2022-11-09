@@ -4,6 +4,7 @@ import Button from "../button/Button";
 import "./style.scss";
 import Logo from "../../assets/imgs/Logo.svg";
 import { AuthContext } from "../../context/auth";
+import { Link } from "react-router-dom";
 
 type Inputs = {
   email: string;
@@ -44,6 +45,7 @@ const LoginForm: React.FunctionComponent = () => {
         />
         {errors.password && <span>O Campo senha é Obrigatório!</span>}
         <Button type="submit">Fazer Login</Button>
+        <Link to="/register">Criar Conta</Link>
       </form>
     </div>
   );

@@ -7,6 +7,7 @@ export const AuthContext = createContext({
   user: null,
   login: (email: string, password: string) => {},
   logout: () => {},
+  registerUser: (name: string, email: string, password: string) => {},
   loading: true,
 });
 
@@ -23,6 +24,11 @@ export const AuthProvider = ({ children }: any) => {
     setLoading(false);
   }, []);
 
+  const registerUser = async (name:string, email: string, password: string) => {
+    // 
+    navigate("/login");
+  };
+
   const login = async (email: string, password: string) => {
     // create a session
     const response = await createSession(email, password);
@@ -36,6 +42,8 @@ export const AuthProvider = ({ children }: any) => {
     setUser(userLogged);
     navigate("/");
   };
+
+
   
   const logout = () => {
     localStorage.removeItem("user");
@@ -49,7 +57,7 @@ export const AuthProvider = ({ children }: any) => {
 
   return (
     <AuthContext.Provider
-      value={{ authenticated: !!user, user, login, loading, logout }}
+      value={{ authenticated: !!user, user, login, loading, logout, registerUser }}
     >
       {children}
     </AuthContext.Provider>
