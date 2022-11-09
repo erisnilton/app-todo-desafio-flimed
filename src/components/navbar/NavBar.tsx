@@ -20,14 +20,13 @@ const NavBar: React.FunctionComponent = () => {
         />
       </Link>
       <div className="navbar--title">
-        <span>App todo - desafio frontend</span>
+      <Link to={"/notes/create"}>
+        <Button size="sm">CRIAR NOTA</Button>
+      </Link>
       </div>
       {user && <span className="navbar--name">Logado como: <strong>{user.name}</strong></span>}
       
-      { user && <Button size="sm" color="danger"  onClick={logout}>Logout</Button> }
-      <Link to={"/notes/create"}>
-        <Button size="sm">Nova Nota</Button>
-      </Link>
+      { user && <Button size="sm" color="danger"  onClick={logout}>Sair</Button> }
     </div>
   );
 };

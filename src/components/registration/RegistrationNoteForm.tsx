@@ -6,6 +6,7 @@ import { createNota } from "../../services/api";
 import { useNavigate } from "react-router";
 import { Note } from "../../model/note";
 import { Authenticated } from "../Authenticated/Authenticated";
+import { toast, ToastContainer } from "react-toastify";
 
 const RegistrationNoteForm: React.FunctionComponent = () => {
   const navigate = useNavigate();
@@ -20,17 +21,28 @@ const RegistrationNoteForm: React.FunctionComponent = () => {
     navigate("/");
   }
 
+  function messageSuccess() {
+    toast.success("Nota criada com sucesso!", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  }
+
   const onSubmit: SubmitHandler<Note> = (nota) => {
     let items = JSON.parse(localStorage.getItem("notas") || "[]");
     createNota(nota)
       .then((response) => {
-        items.push(response.data.note);
-        localStorage.setItem("notas", JSON.stringify(items));
-        navigate("/");
+        if (response.status === 200) {
+          messageSuccess();
+          items.push(response.data.note);
+          localStorage.setItem("notas", JSON.stringify(items));
+          navigate("/");
+        }
       })
       .catch((error) => {
         if (error.response.status === 401) {
-          alert("Você não tem permissão para criar uma nota!");
+          toast.error("Você não está autorizado!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
           navigate("/login");
         }
       });
@@ -57,7 +69,9 @@ const RegistrationNoteForm: React.FunctionComponent = () => {
           <Button size="sm" type="submit">
             Cadastrar
           </Button>
-          <Button size="sm" color="info" onClick={handleCancel}>Cancelar</Button>
+          <Button size="sm" color="info" onClick={handleCancel}>
+            Cancelar
+          </Button>
         </div>
       </form>
     </div>

@@ -5,7 +5,7 @@ import { api, createSession, createUser } from "../services/api";
 export const AuthContext = createContext({
   authenticated: false,
   user: null,
-  login: (email: string, password: string) => {},
+  login: (email: string, password: string) => Promise.resolve({}),
   logout: () => {},
   registerUser: (name: string, email: string, password: string) => {},
   loading: true,
@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }: any) => {
     createUser(name, email, password)
       .then((response) => {
         if (response.status === 201) {
-          alert("Usuário criado com sucesso!");
           navigate("/login");
         }
       })
@@ -43,16 +42,38 @@ export const AuthProvider = ({ children }: any) => {
 
   const login = async (email: string, password: string) => {
     // create a session
-    const response = await createSession(email, password);
-    const userLogged = response.data.user;
-    const token = response.data.token;
+    return createSession(email, password)
+      .then((response) => {
+        const userLogged = response.data.user;
+        const token = response.data.token;
 
-    localStorage.setItem("user", JSON.stringify(userLogged));
-    localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(userLogged));
+        localStorage.setItem("token", token);
 
-    api.defaults.headers.Authorization = `Bearer ${token}`;
-    setUser(userLogged);
-    navigate("/");
+        api.defaults.headers.Authorization = `Bearer ${token}`;
+        setUser(userLogged);
+
+        return Promise.resolve(userLogged);
+      })
+      .catch((error) => {
+        console.log(error);
+        return Promise.reject(error.response.data);
+      });
+
+    // if (response.status === 200) {
+    //   const userLogged = response.data.user;
+    //   const token = response.data.token;
+
+    //   localStorage.setItem("user", JSON.stringify(userLogged));
+    //   localStorage.setItem("token", token);
+
+    //   api.defaults.headers.Authorization = `Bearer ${token}`;
+    //   setUser(userLogged);
+    //   navigate("/");
+
+    //   return response;
+    // }
+    // return null;
   };
 
   const logout = () => {

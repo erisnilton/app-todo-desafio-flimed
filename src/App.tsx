@@ -1,18 +1,14 @@
-import Layout from "./components/layout/Layout";
-import NavBar from "./components/navbar/NavBar";
-import CadastrarNotaForm from "./components/cadastrar/CadastrarNotaForm";
-import NotaView from "./components/nota-view/NotaView";
-
-import { Suspense, useState } from "react";
-
+import { Suspense } from "react";
 import { BrowserRouter as Router, useRoutes } from "react-router-dom";
-
 import routes from "~react-pages";
 import { AuthProvider } from "./context/auth";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <AuthProvider>
+      <ToastContainer autoClose={3000} />
       <Suspense fallback={<p>Loading...</p>}>{useRoutes(routes)}</Suspense>;
     </AuthProvider>
   )

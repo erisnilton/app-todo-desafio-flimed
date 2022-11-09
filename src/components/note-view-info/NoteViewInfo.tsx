@@ -8,10 +8,10 @@ const NoteViewInfo: React.FunctionComponent = ({note}) => {
         <ul>
           <li><span>ID: </span>{`${note?.id}`}</li>
           <li><span>Titulo: </span>{`${note?.title}`}</li>
-          <li><span>Descrição: </span>{`${note?.description}`}</li>
+          <li><span >Descrição: </span>{`${note?.description}`}</li>
           <li><span>Conteúdo: </span>{`${note?.content}`} </li>
         </ul>
-        <Link to={'/'}> Ir para o inicio</Link>
+        <Link to={'/'}> Voltar para inicio</Link>
     </div>
   );
 };

@@ -30,7 +30,6 @@ const Card: React.FunctionComponent<NotaViewProps> = (props) => {
       })
       .catch((error) => {
         if (error.response.status === 401) {
-          alert("Você não tem permissão para criar uma nota!");
           navigate("/login");
         }
       });
@@ -38,17 +37,23 @@ const Card: React.FunctionComponent<NotaViewProps> = (props) => {
 
   return (
     <div className="view--card">
-        <div className="view--card--title">{nota && nota.title}</div>
-        <div className="view--card--content">{nota && nota.content}</div>
-        <div className="view--card--content">{nota && nota.description}</div>
-        <div className="view--card--footer">
-          <Button onClick={handleUpdateNote} color="secondary" size="sm">
-            Atualizar
-          </Button>
-          <Button color="danger" size="sm" onClick={handleDeleteNote}>
-            Deletar
-          </Button>
-        </div>      
+      <div className="view--card--title">{nota && nota.title}</div>
+      <div
+        className="view--card--content"
+        dangerouslySetInnerHTML={{ __html: nota.content }}
+      />
+      <div
+        className="view--card--content"
+        dangerouslySetInnerHTML={{ __html: nota.description }}
+      />
+      <div className="view--card--footer">
+        <Button onClick={handleUpdateNote} color="secondary" size="sm">
+          Atualizar
+        </Button>
+        <Button color="danger" size="sm" onClick={handleDeleteNote}>
+          Deletar
+        </Button>
+      </div>
     </div>
   );
 };
