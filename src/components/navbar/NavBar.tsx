@@ -24,7 +24,7 @@ const NavBar: React.FunctionComponent = () => {
         <Button size="sm">CRIAR NOTA</Button>
       </Link>
       </div>
-      {user && <span className="navbar--name">Logado como: <strong>{user.name}</strong></span>}
+      {user && <span className="navbar--name">Logado como: <strong>{user?.name}</strong></span>}
       
       { user && <Button size="sm" color="danger"  onClick={logout}>Sair</Button> }
     </div>

@@ -15,12 +15,12 @@ const Card: React.FunctionComponent<NotaViewProps> = (props) => {
   const navigate = useNavigate();
   const { nota } = props;
 
-  function handleUpdateNote(e: Event) {
+  function handleUpdateNote(e: React.MouseEvent) {
     e.stopPropagation();
     navigate(`notes/update/${nota.id}`);
   }
 
-  function handleDeleteNote(e: Event) {
+  function handleDeleteNote(e: React.MouseEvent) {
     e.stopPropagation();
     deleteNota(nota.id)
       .then(() => {

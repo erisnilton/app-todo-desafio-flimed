@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { Note } from "../../model/note";
 import './style.scss';
 
-const NoteViewInfo: React.FunctionComponent = ({note}) => {
+const NoteViewInfo: React.FunctionComponent<any> = ({ note } : {note: Note}) => {
   return (
     <div className="info container">
         <h2>Informações da nota</h2>
