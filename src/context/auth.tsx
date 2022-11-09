@@ -5,7 +5,7 @@ import { api, createSession, createUser } from "../services/api";
 
 export const AuthContext = createContext({
   authenticated: false,
-  user: {} as User,
+  user: null ,
   login: (email: string, password: string) => Promise.resolve({}),
   logout: () => {},
   registerUser: (name: string, email: string, password: string) => {},
@@ -14,7 +14,7 @@ export const AuthContext = createContext({
 
 export const AuthProvider = ({ children }: any) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({} as User);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -57,7 +57,6 @@ export const AuthProvider = ({ children }: any) => {
         return Promise.resolve(userLogged);
       })
       .catch((error) => {
-        console.log(error);
         return Promise.reject(error.response.data);
       });
   };
@@ -66,7 +65,7 @@ export const AuthProvider = ({ children }: any) => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     api.defaults.headers.Authorization = null;
-    setUser({} as User);
+    setUser(null);
     navigate("/login");
   };
 

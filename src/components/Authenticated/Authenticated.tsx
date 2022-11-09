@@ -5,6 +5,9 @@ import { AuthContext } from "../../context/auth";
 export function Authenticated<T extends React.FunctionComponent>(Component: T) {
   return (props: any) => {
     const { authenticated, loading } = useContext(AuthContext);
+    {
+      console.log(authenticated);
+    }
     if (loading) {
       return <div className="loading">Carregando..</div>;
     }

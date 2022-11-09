@@ -8,8 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <AuthProvider>
-      <ToastContainer autoClose={3000} />
       <Suspense fallback={<p>Loading...</p>}>{useRoutes(routes)}</Suspense>;
+    <ToastContainer autoClose={3000} />
     </AuthProvider>
   )
 }
