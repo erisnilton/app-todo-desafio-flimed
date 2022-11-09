@@ -1,12 +1,13 @@
 
 import React from 'react';
+import NotFound from '../components/notfound/NotFound';
 
 // import { Container } from './styles';
 
-const NotFound: React.FC = () => {
+const NotFoundPage: React.FC = () => {
   return (
-    <h1>Sai daqui!</h1>
+    <NotFound/>
   )
 }
 
-export default NotFound;
+export default NotFoundPage;

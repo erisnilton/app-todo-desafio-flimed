@@ -5,6 +5,13 @@ export const api = axios.create({
   baseURL: "https://test-flimed-backend.herokuapp.com",
 });
 
+
+export const createUser = async (name: string, email: string, password: string) => {
+  console.log({ name, email, password });
+  
+  return await api.post("/users/create", { name, email, password });
+};
+
 export const createSession = async (email: string, password: string) => {
   return await api.post("/users/auth", { email, password });
 };

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { api, createSession } from "../services/api";
+import { api, createSession, createUser } from "../services/api";
 
 export const AuthContext = createContext({
   authenticated: false,
@@ -24,9 +24,21 @@ export const AuthProvider = ({ children }: any) => {
     setLoading(false);
   }, []);
 
-  const registerUser = async (name:string, email: string, password: string) => {
-    // 
-    navigate("/login");
+  const registerUser = async (
+    name: string,
+    email: string,
+    password: string
+  ) => {
+    createUser(name, email, password)
+      .then((response) => {
+        if (response.status === 201) {
+          alert("Usuário criado com sucesso!");
+          navigate("/login");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const login = async (email: string, password: string) => {
@@ -43,8 +55,6 @@ export const AuthProvider = ({ children }: any) => {
     navigate("/");
   };
 
-
-  
   const logout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
@@ -53,11 +63,16 @@ export const AuthProvider = ({ children }: any) => {
     navigate("/login");
   };
 
-
-
   return (
     <AuthContext.Provider
-      value={{ authenticated: !!user, user, login, loading, logout, registerUser }}
+      value={{
+        authenticated: !!user,
+        user,
+        login,
+        loading,
+        logout,
+        registerUser,
+      }}
     >
       {children}
     </AuthContext.Provider>
